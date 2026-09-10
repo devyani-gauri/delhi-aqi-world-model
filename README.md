@@ -17,10 +17,10 @@ The **Delhi AQI Project** aims to model and simulate air quality dynamics across
 ## Steps  
 
 ### 1. Data Ingestion and Processing  
-1. Get data from **OSM (OpenStreetMap)** for New Delhi  
-2. Visualize in **2D or 3D** (PyVista for 3D)  
-3. Get **AQI data** from OpenAQ, AIRDELHI, DPCC  
-4. Clean and merge data → generate **geolocated hotspot maps**  
+1. ✅ Get data from **OSM (OpenStreetMap)** for New Delhi — see [`notebooks/3d_model.ipynb`](notebooks/3d_model.ipynb)
+2. ✅ Visualize in **2D or 3D** (PyVista for 3D) — see [`notebooks/3d_model.ipynb`](notebooks/3d_model.ipynb)
+3. 🚧 Get **AQI data** from OpenAQ, AIRDELHI, DPCC — in progress, see [`notebooks/aqi_ingestion.ipynb`](notebooks/aqi_ingestion.ipynb) (OpenAQ v3 station + latest-reading fetch for Delhi)
+4. ⬜ Clean and merge data → generate **geolocated hotspot maps**  
 
 ### 2. Simulation Inputs  
 - Add **traffic, building, congestion models** using Mesa  
