@@ -1,2 +1,4 @@
 notebooks/cache
 notebooks/outputs
+.env
+aqi_env/
