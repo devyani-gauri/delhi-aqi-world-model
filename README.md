@@ -3,6 +3,24 @@
 ## Overview  
 The **Delhi AQI Project** aims to model and simulate air quality dynamics across New Delhi. Using open geospatial and air quality datasets, the project integrates traffic, building, and congestion models with agent-based and reinforcement learning (RL) systems. The end goal is to design and test intervention strategies to reduce AQI hotspots.
 
+## Current Prototype
+
+The first runnable milestone simulates 24 hourly PM2.5 grids over a 5 km × 5 km
+area centered on Connaught Place. The grid, emissions, and weather variation are
+synthetic: this validates the software pipeline and is **not** a calibrated AQI
+forecast.
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[dev]"
+python -m src.server
+python -m pytest
+```
+
+The command saves the full grid history as NumPy data and renders one hourly map
+under `outputs/`.
+
 ---
 
 ## Tech Stack  

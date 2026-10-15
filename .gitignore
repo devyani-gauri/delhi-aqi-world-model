@@ -2,3 +2,8 @@ notebooks/cache
 notebooks/outputs
 .env
 aqi_env/
+outputs/
+.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/
