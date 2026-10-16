@@ -1,10 +1,12 @@
 """Visualization helpers for model output."""
 
 from pathlib import Path
+import sys
 
 import matplotlib
 
-matplotlib.use("Agg")
+if "ipykernel" not in sys.modules:
+    matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
 import numpy as np

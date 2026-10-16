@@ -6,6 +6,7 @@ import argparse
 import csv
 import json
 import math
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -14,7 +15,8 @@ from urllib.request import Request, urlopen
 
 import matplotlib
 
-matplotlib.use("Agg")
+if "ipykernel" not in sys.modules:
+    matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
