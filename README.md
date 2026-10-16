@@ -21,6 +21,16 @@ python -m pytest
 The command saves the full grid history as NumPy data and renders one hourly map
 under `outputs/`.
 
+Build a geographic context map with real OpenStreetMap roads, PM2.5-capable
+OpenAQ stations, and the simulation grid:
+
+```bash
+python -m src.geography --refresh-roads
+```
+
+The downloaded OSM snapshot is saved under `data/`, so the map can be reproduced
+without making a network request on every run.
+
 ---
 
 ## Tech Stack  
