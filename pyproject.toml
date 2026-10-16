@@ -15,6 +15,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
+notebook = ["jupyterlab>=4.4"]
 
 [project.scripts]
 delhi-aqi-sim = "src.server:main"

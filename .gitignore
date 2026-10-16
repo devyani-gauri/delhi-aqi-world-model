@@ -1,5 +1,6 @@
 notebooks/cache
 notebooks/outputs
+.ipynb_checkpoints/
 .env
 aqi_env/
 outputs/

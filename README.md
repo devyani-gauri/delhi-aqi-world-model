@@ -31,6 +31,20 @@ python -m src.geography --refresh-roads
 The downloaded OSM snapshot is saved under `data/`, so the map can be reproduced
 without making a network request on every run.
 
+### Interactive walkthrough
+
+To explore the project visually and run each stage yourself:
+
+```bash
+source .venv/bin/activate
+python -m pip install -e ".[dev,notebook]"
+python -m jupyter lab
+```
+
+Open `notebooks/project_walkthrough.ipynb` in JupyterLab and run cells in order
+with **Shift+Enter**. The notebook explains which inputs are real, which model
+components are synthetic, and how each visual is produced.
+
 ---
 
 ## Tech Stack  
