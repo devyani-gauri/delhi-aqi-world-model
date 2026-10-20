@@ -1,85 +1,87 @@
-# Delhi AQI Project
+# Delhi AQI World Model
 
-## Overview  
-The **Delhi AQI Project** aims to model and simulate air quality dynamics across New Delhi. Using open geospatial and air quality datasets, the project integrates traffic, building, and congestion models with agent-based and reinforcement learning (RL) systems. The end goal is to design and test intervention strategies to reduce AQI hotspots.
+An experimental, data-grounded world model for exploring how PM2.5 may be
+distributed across Delhi and how pollution could respond to interventions.
 
-## Current Prototype
+The current prototype combines real OpenStreetMap roads and OpenAQ monitoring
+station locations with a small synthetic grid simulation centered on Connaught
+Place. It validates the project architecture and visualization workflow; it is
+**not yet a calibrated forecast or public-health decision tool**.
 
-The first runnable milestone simulates 24 hourly PM2.5 grids over a 5 km × 5 km
-area centered on Connaught Place. The grid, emissions, and weather variation are
-synthetic: this validates the software pipeline and is **not** a calibrated AQI
-forecast.
+## Current state
+
+- 5 km × 5 km study area centered on Connaught Place
+- 10 × 10 grid with hourly state updates over 24 hours
+- 4,782 cached OpenStreetMap road segments
+- PM2.5-capable OpenAQ station inventory and site grouping
+- Synthetic emissions, rush-hour peaks, dispersion, removal, and weather noise
+- 2D maps, hourly comparisons, and an interactive Jupyter walkthrough
+- 9 automated tests
+
+See [Project overview](docs/PROJECT_OVERVIEW.md) for the full scope and current
+limitations.
+
+## Quick start
+
+Python 3.11 or newer is required.
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -e ".[dev]"
-python -m src.server
+python -m pip install -e ".[dev,notebook]"
 python -m pytest
+python -m jupyter lab
 ```
 
-The command saves the full grid history as NumPy data and renders one hourly map
-under `outputs/`.
+Open `notebooks/project_walkthrough.ipynb` and run cells in order with
+**Shift+Enter**.
 
-Build a geographic context map with real OpenStreetMap roads, PM2.5-capable
-OpenAQ stations, and the simulation grid:
+Run the simulation from the terminal:
+
+```bash
+python -m src.server
+```
+
+Generate the geographic context map from the cached road snapshot:
+
+```bash
+python -m src.geography
+```
+
+Refresh the road snapshot from OpenStreetMap first:
 
 ```bash
 python -m src.geography --refresh-roads
 ```
 
-The downloaded OSM snapshot is saved under `data/`, so the map can be reproduced
-without making a network request on every run.
+Generated arrays and maps are written under `outputs/` and are not committed.
 
-### Interactive walkthrough
+## Documentation
 
-To explore the project visually and run each stage yourself:
+- [Project overview](docs/PROJECT_OVERVIEW.md) — purpose, scope, status, and limitations
+- [Development guide](docs/DEVELOPMENT.md) — setup, dependencies, commands, and data
+- [Architecture](docs/ARCHITECTURE.md) — modules, data flow, and design boundaries
+- [Concepts](docs/CONCEPTS.md) — PM2.5, AQI, grids, observations, and dispersion
+- [Roadmap and task list](docs/ROADMAP.md) — completed work, next milestones, and backlog
 
-```bash
-source .venv/bin/activate
-python -m pip install -e ".[dev,notebook]"
-python -m jupyter lab
+## Repository layout
+
+```text
+data/          Cached OpenAQ station inventory and OSM road snapshot
+docs/          Living project documentation and roadmap
+notebooks/     Exploration, ingestion, 3D experiments, and guided walkthrough
+src/           Reusable simulation, geography, visualization, and CLI code
+tests/         Automated unit tests
 ```
 
-Open `notebooks/project_walkthrough.ipynb` in JupyterLab and run cells in order
-with **Shift+Enter**. The notebook explains which inputs are real, which model
-components are synthetic, and how each visual is produced.
+## Documentation policy
 
----
+Each feature commit should update documentation when it changes behavior,
+dependencies, architecture, assumptions, outputs, or roadmap status. Completed
+tasks should be checked off in `docs/ROADMAP.md` in the same commit that delivers
+them.
 
-## Tech Stack  
-- **Data & GIS:** OSMnx, OpenAQ, AIRDELHI, DPCC
-- **Simulation:** FiPy (dispersion PDEs), Mesa (agent-based models)  
-- **Visualization:** PyVista (3D) 
-- **Agents & AI:** LangGraph (LLM planners), RLlib + PettingZoo (multi-agent RL)  
-- **Optimization & Causal Tools:** OR-Tools, DoWhy/EconML, PyMC  
+## License
 
----
-
-## Steps  
-
-### 1. Data Ingestion and Processing  
-1. ✅ Get data from **OSM (OpenStreetMap)** for New Delhi — see [`notebooks/3d_model.ipynb`](notebooks/3d_model.ipynb)
-2. ✅ Visualize in **2D or 3D** (PyVista for 3D) — see [`notebooks/3d_model.ipynb`](notebooks/3d_model.ipynb)
-3. 🚧 Get **AQI data** from OpenAQ, AIRDELHI, DPCC — in progress, see [`notebooks/aqi_ingestion.ipynb`](notebooks/aqi_ingestion.ipynb) (OpenAQ v3 station + latest-reading fetch for Delhi)
-4. ⬜ Clean and merge data → generate **geolocated hotspot maps**  
-
-### 2. Simulation Inputs  
-- Add **traffic, building, congestion models** using Mesa  
-
-### 3. Forecasting  
-- Create an **AQI forecast** based on historical hotspot data  
-
-### 4. Agent Creation  
-1. **LLM-based tool planners** (LangGraph)  
-2. **RL-based execution & evaluation agents** (RLlib + PettingZoo)  
-
----
-
-## Roadmap (Future Work)  
-- Integrate optimization (OR-Tools) for scheduling interventions  
-- Add Bayesian calibration (PyMC) for emissions  
-- Build dashboards for policymakers and city planners  
-- Extend to **multi-scale modeling** (ward → city → NCR)  
-
----
+No license has been selected yet. Until one is added, the repository is not
+offered under an open-source license.
