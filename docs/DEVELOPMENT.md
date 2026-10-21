@@ -67,6 +67,16 @@ The station CSV describes station capability and location, not historical PM2.5
 measurements. Never commit API keys. The ingestion notebook reads
 `OPENAQ_API_KEY` from the environment or a local ignored `.env` file.
 
+The reusable OpenAQ client also reads `OPENAQ_API_KEY` from the environment:
+
+```bash
+export OPENAQ_API_KEY="your-key-here"
+```
+
+It first discovers PM2.5 sensors for a station ID, then retrieves measurements
+for a timezone-aware interval. The client validates OpenAQ responses but does
+not yet cache data or initialize the simulation grid.
+
 Generated outputs, virtual environments, notebook checkpoints, test caches, and
 package metadata are ignored and should be recreated rather than committed.
 

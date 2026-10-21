@@ -41,10 +41,10 @@ locations.
 Exit criteria: a deterministic 24-hour demonstration runs end to end and its
 state transitions are visually inspectable.
 
-## Milestone 3 — Observed PM2.5 initialization (next)
+## Milestone 3 — Observed PM2.5 initialization (in progress)
 
-- [ ] Define an observation schema: station, timestamp, value, unit, provenance
-- [ ] Add a reusable OpenAQ client outside the notebook
+- [x] Define an observation schema: station, timestamp, value, unit, provenance
+- [x] Add a reusable OpenAQ client outside the notebook
 - [ ] Fetch timestamped PM2.5 readings for study-area stations
 - [ ] Cache a reproducible raw observation snapshot
 - [ ] Validate timestamps, units, coordinates, and missing values

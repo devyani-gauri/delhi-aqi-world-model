@@ -14,9 +14,10 @@ Place. It validates the project architecture and visualization workflow; it is
 - 10 × 10 grid with hourly state updates over 24 hours
 - 4,782 cached OpenStreetMap road segments
 - PM2.5-capable OpenAQ station inventory and site grouping
+- Typed PM2.5 observation records and a reusable OpenAQ v3 client
 - Synthetic emissions, rush-hour peaks, dispersion, removal, and weather noise
 - 2D maps, hourly comparisons, and an interactive Jupyter walkthrough
-- 9 automated tests
+- 17 automated tests
 
 See [Project overview](docs/PROJECT_OVERVIEW.md) for the full scope and current
 limitations.
@@ -70,7 +71,7 @@ Generated arrays and maps are written under `outputs/` and are not committed.
 data/          Cached OpenAQ station inventory and OSM road snapshot
 docs/          Living project documentation and roadmap
 notebooks/     Exploration, ingestion, 3D experiments, and guided walkthrough
-src/           Reusable simulation, geography, visualization, and CLI code
+src/           Simulation, geography, observations, visualization, and CLI code
 tests/         Automated unit tests
 ```
 

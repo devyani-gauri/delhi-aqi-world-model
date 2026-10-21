@@ -21,10 +21,14 @@ SimulationConfig
    └── simulate_pm25 ───────→ hourly NumPy grid history
                                       ↓
                                heatmaps and charts
+
+OPENAQ_API_KEY ──→ OpenAQClient ──→ validated PM2.5 observations
+                                         (not yet connected to the grid)
 ```
 
-Geography and simulation share configuration, but real roads and station
-measurements do not yet drive the numerical model.
+Geography and simulation share configuration. OpenAQ responses can now be
+validated as typed observations, but live measurements and real roads do not
+yet drive the numerical model.
 
 ## Modules
 
@@ -44,6 +48,14 @@ measurements do not yet drive the numerical model.
 - Downloads and parses OSM roads through Overpass
 - Draws roads, sites, grid, and Connaught Place center
 
+### `src/observations.py`
+
+- Defines immutable sensor metadata and PM2.5 observation records
+- Authenticates to OpenAQ v3 with `OPENAQ_API_KEY`
+- Discovers PM2.5 sensors for a known station
+- Retrieves paginated measurements for a timezone-aware interval
+- Validates parameter names, units, timestamps, coordinates, and response shape
+
 ### `src/utils.py`
 
 Creates and saves stable-scale hourly PM2.5 heatmaps. Matplotlib uses inline
@@ -57,7 +69,8 @@ history, and renders a selected hour.
 ### `tests/`
 
 Tests cover configuration validation, grid output, reproducibility, geographic
-bounds, station filtering and grouping, and OSM parsing.
+bounds, station filtering and grouping, OSM parsing, observation validation,
+authentication errors, and measurement pagination.
 
 ## Notebooks
 
@@ -72,7 +85,7 @@ Reusable logic should not live only in notebooks.
 ## Next architecture boundary
 
 ```text
-Timestamped PM2.5 readings
+Validated PM2.5 observations
           ↓
 Validation and unit normalization
           ↓
